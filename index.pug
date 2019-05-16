@@ -1,0 +1,69 @@
+doctype html
+
+head
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+    title "sign page"
+    link(rel="stylesheet", href="style.css")
+body
+    .header#header
+        h1 Welcome {userName}
+    .container
+        #signin.form
+            h3 login
+            form(action="login")
+                .form-group
+                    input(name=""  type="email" placeholder="Email" id="emailLogin" data-bind="text: emailLogin")
+                .form-group
+                    input(type="password" placeholder="Password" id="passwordLogin" data-bind="text: passwordLogin")
+                button.btn.btn-cancel(type="reset") Cancel
+                button.btn.btn-submit(type="submit") Submit
+            button.btn.btn-toggle(action="") Not a member? Sign-up!
+        #signup.form
+            h3 signup
+            form(action="signup")
+                .form-group
+                    label(for="emailSignup") Enter your email
+                    input(name="emailSignup"  type="email" placeholder="Email" id="emailSignup" data-bind="text: emailSignup")
+                .form-group
+                    label(for="passwordSignup1") Choose your password
+                    input(name="passwordSignup1"  type="password" placeholder="Password" id="passwordSignup1")
+                .form-group
+                    label(for="passwordSignup2") Repeat your password
+                    input(name="passwordSignup2"  type="email" placeholder="Email" id="passwordSignup2")
+                .form-group
+                    input#genderFluid(type="radio", name="gender" value="Fluid")
+                    label(for="genderFluid") Fluid!
+                    input(type="radio", name="gender" value="Uknown" id="genderUnknown")
+                    label(for="genderUnknown") Unknown!                  
+                    input(type="radio", name="gender" value="Human" id="genderHuman")
+                    label(for="genderUnknown") Human!
+                    input(type="radio", name="gender" value="Cyborg" id="genderCyborg")
+                    label(for="genderCyborgs") Cyborg!           
+                .form-group
+                    label(for="dob") Date of birth
+                    input#dob(type="date", name="dob")
+                button.btn.btn-cancel(type="reset") Cancel
+                button.btn.btn-submit(type="submit") Submit
+    #footer.footer
+        p 
+            h4
+                p Code brewed with love in Dublin using 
+                    a(href="https://pugjs.org/api/getting-started.html") PUG
+                p    ,
+                    a(href="https://sass-lang.com") SASS
+                br
+                p and 
+                    a(href="https://knockoutjs.com") Knockout.js.
+                br
+                p Compiled with the help of 
+                    a(href="https://gulpjs.com") Gulp
+
+
+    script(type="text/javascript" src="../node_modules/knockout/build/output/knockout-latest.js")
+    script(type="text/javascript" src="scripts.js")
+
+
+
+
+    

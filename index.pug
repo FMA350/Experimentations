@@ -1,5 +1,13 @@
-doctype html
 
+mixin form-group(name, id, type, placeholder, db)
+    .form-group( data-bind="css: {error : "+id+"Flag() === false }" )
+        input(name= id type= type placeholder= placeholder id= id data-bind= db)
+
+//- mixin button-group()
+
+    
+
+doctype html
 head
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
@@ -7,58 +15,57 @@ head
     link(rel="stylesheet", href="style.css")
 body
     .header#header
-        h1 Welcome {userName}
+        h1 Welcome
     .container
-        #signin.form
+        #signin.form(data-bind="visible:hasAccount")
             h3 login
-            form(action="login")
+            form(data-bind="submit: login" novalidate)
+                +form-group('email', 'emailLogin', 'email', 'enter your email', "value: emailLogin")
                 .form-group
-                    input(name=""  type="email" placeholder="Email" id="emailLogin" data-bind="text: emailLogin")
-                .form-group
-                    input(type="password" placeholder="Password" id="passwordLogin" data-bind="text: passwordLogin")
-                button.btn.btn-cancel(type="reset") Cancel
-                button.btn.btn-submit(type="submit") Submit
-            button.btn.btn-toggle(action="") Not a member? Sign-up!
-        #signup.form
+                    input(type="password" placeholder = "Password" id="passwordLogin" data-bind="value: passwordLogin")
+                .buttons
+                    button.btn.btn-cancel(data-bind="click:reset") Cancel
+                    button.btn.btn-submit(type="submit") Submit
+            button.btn.btn-toggle(data-bind="click:toggleSign") Not a member? Sign-up!
+        #signup.form(data-bind="hidden:hasAccount")
             h3 signup
-            form(action="signup")
+            form(data-bind="submit: signup" novalidate)
+                +form-group('email', 'emailSignup', 'email',"enter your email", "event: {change : checkForm},value: emailSignup")
+                +form-group('Password', 'passwordSignup1', "password", "Your password", "event:{change :checkForm},value: passwordSignup1")
+                +form-group('Password', 'passwordSignup2', "password", "Repeat your password", "event:{ change:checkForm},value: passwordSignup2")
                 .form-group
-                    label(for="emailSignup") Enter your email
-                    input(name="emailSignup"  type="email" placeholder="Email" id="emailSignup" data-bind="text: emailSignup")
-                .form-group
-                    label(for="passwordSignup1") Choose your password
-                    input(name="passwordSignup1"  type="password" placeholder="Password" id="passwordSignup1")
-                .form-group
-                    label(for="passwordSignup2") Repeat your password
-                    input(name="passwordSignup2"  type="email" placeholder="Email" id="passwordSignup2")
-                .form-group
-                    input#genderFluid(type="radio", name="gender" value="Fluid")
-                    label(for="genderFluid") Fluid!
-                    input(type="radio", name="gender" value="Uknown" id="genderUnknown")
-                    label(for="genderUnknown") Unknown!                  
-                    input(type="radio", name="gender" value="Human" id="genderHuman")
-                    label(for="genderUnknown") Human!
-                    input(type="radio", name="gender" value="Cyborg" id="genderCyborg")
-                    label(for="genderCyborgs") Cyborg!           
-                .form-group
-                    label(for="dob") Date of birth
-                    input#dob(type="date", name="dob")
-                button.btn.btn-cancel(type="reset") Cancel
-                button.btn.btn-submit(type="submit") Submit
-    #footer.footer
-        p 
-            h4
-                p Code brewed with love in Dublin using 
-                    a(href="https://pugjs.org/api/getting-started.html") PUG
-                p    ,
-                    a(href="https://sass-lang.com") SASS
-                br
-                p and 
-                    a(href="https://knockoutjs.com") Knockout.js.
-                br
-                p Compiled with the help of 
-                    a(href="https://gulpjs.com") Gulp
+                    .radio
+                        input#genderFluid(type="radio", name="gender" value="Fluid" data-bind="checked: radioSelectedOptionValue")
+                        label(for="genderFluid") Fluid!
+                    .radio
+                        input(type="radio", name="gender" value="Uknown" id="genderUnknown" data-bind="checked: radioSelectedOptionValue")
+                        label(for="genderUnknown") Unknown!                  
+                    .radio
+                        input(type="radio", name="gender" value="Human" id="genderHuman" data-bind="checked: radioSelectedOptionValue")
+                        label(for="genderHuman") Human!
+                    .radio
+                        input(type="radio", name="gender" value="Cyborg" id="genderCyborg" data-bind="checked: radioSelectedOptionValue")
+                        label(for="genderCyborg") Cyborg!           
+                label(for="dob") Date of birth
+                +form-group("dob","dob", "date", "", "value: dob")
 
+                .buttons
+                    button.btn.btn-cancel(type="reset") Cancel
+                    button.btn.btn-submit(type="submit") Submit
+            button.btn.btn-toggle(data-bind="click:toggleSign") Already a member? Login!
+
+        //- #footer.footer
+        //-     h4
+        //-         p Code brewed with love in Dublin using 
+        //-             a(href="https://pugjs.org/api/getting-started.html") PUG
+        //-         p    ,
+        //-             a(href="https://sass-lang.com") SASS
+        //-         br
+        //-         p and 
+        //-             a(href="https://knockoutjs.com") Knockout.js.
+        //-         br
+        //-         p Compiled with the help of 
+        //-             a(href="https://gulpjs.com") Gulp
 
     script(type="text/javascript" src="../node_modules/knockout/build/output/knockout-latest.js")
     script(type="text/javascript" src="scripts.js")

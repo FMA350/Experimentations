@@ -40,7 +40,7 @@ function buildCSS(cb){
 function buildHTML(cb){
 	gulp.src('*.pug').pipe(pug({
 		doctype: 'html',
-		pretty: false
+		pretty: true
 	})).pipe(gulp.dest('src/'));
 		//is callback needed?
 }

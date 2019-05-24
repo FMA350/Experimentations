@@ -43,11 +43,11 @@
 .buttons button {
   margin: 2%;
   background-color: #81ecec;
+  color: #2d3436;
   border: none;
   padding: 4%;
   border-radius: 5px;
   box-shadow: 3px 3px 5px #2d3436;
-  color: #dfe6e9;
   max-height: 50px; }
 
 .btn-toggle {
@@ -61,11 +61,13 @@
   max-height: 50px; }
 
 .radio {
-  background-color: #81ecec;
   padding: 3px; }
 
 .error {
   background-color: #d63031; }
+
+.errorMessage {
+  color: #d63031; }
 
 .footer {
   background-color: #2d3436;
